@@ -103,10 +103,10 @@ async function validateSPLTokenTransfer(
     const recipientATA = await getAssociatedTokenAddress(splToken, recipient);
     const accountIndex = message.accountKeys.findIndex((pubkey) => pubkey.equals(recipientATA));
     if (accountIndex === -1) throw new ValidateTransferError('recipient not found');
-
+    
     const preBalance = meta.preTokenBalances?.find((x) => x.accountIndex === accountIndex);
     const postBalance = meta.postTokenBalances?.find((x) => x.accountIndex === accountIndex);
-
+    
     return [
         new BigNumber(preBalance?.uiTokenAmount.uiAmountString || 0),
         new BigNumber(postBalance?.uiTokenAmount.uiAmountString || 0),
